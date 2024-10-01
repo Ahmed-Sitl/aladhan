@@ -14,7 +14,7 @@ const columns = [
   { field: "Isha", headerName: "Isha", width: 150 },
 ];
 
-const paginationModel = { page: 0, pageSize: 31 };
+const paginationModel = { page: 0, pageSize: 11 };
 
 export default function DataTable({ data }) {
   const rows = data.data
