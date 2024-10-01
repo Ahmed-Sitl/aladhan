@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Base API URL without query parameters
-const baseUrl = "http://api.aladhan.com/v1/calendarByCity";
+const baseUrl = "https://api.aladhan.com/v1/calendarByCity";
 
 // Function to fetch prayer times based on city, month, and year
 async function fetchPrayerTimes(city, month, year) {
