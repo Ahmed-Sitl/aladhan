@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import fetchPrayerTimes from "./../hooks/API"; // Assuming you have a function for fetching the prayer times
 import cities from "../data/cities.json"; // Assuming cities is a JSON file with city data
 
@@ -15,7 +15,7 @@ const Navbar = ({ setData }) => {
   const months = Array.from({ length: 12 }, (_, i) => i + 1); // Generates months from 1 to 12
 
   // Generate a list of years (50 years back up to the current year)
-  const years = Array.from({ length: 21 }, (_, i) => currentYear - 19 + i); // Generates years from (currentYear - 50) to currentYear
+  const years = Array.from({ length: 21 }, (_, i) => currentYear - 19 + i); // Generates years from (currentYear - 19) to currentYear
 
   // Function to fetch prayer times based on selected values
   const fetchTimesOnChange = async () => {
@@ -24,9 +24,13 @@ const Navbar = ({ setData }) => {
     const selectedCity = citySelectRef.current.value;
 
     // Call the API or your function to fetch prayer times
-
     setData(await fetchPrayerTimes(selectedCity, selectedMonth, selectedYear));
   };
+
+  // useEffect to fetch data when the component mounts or when the select values change
+  useEffect(() => {
+    fetchTimesOnChange(); // Call the function to fetch data
+  }, [currentMonthInitial, currentYear]); // This will run when the component mounts and when the current year or month changes
 
   return (
     <nav className="container mx-auto flex flex-col md:flex-row justify-between items-center py-4 relative">
